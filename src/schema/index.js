@@ -1,10 +1,12 @@
 const { makeSchema } = require('@nexus/schema')
 const { join } = require('path')
 
-const { TodoQuery, NewTodo, PatchTodo, DestroyTodo } = require('../graphql/todo')
+const Posts = require('../graphql/posts')
+const Comments = require('../graphql/comments')
+const Query = require('../graphql/query')
 
 const schema = makeSchema({
-    types: [TodoQuery, NewTodo, PatchTodo, DestroyTodo],
+    types: [Posts, Comments, Query],
     outputs: {
         typegen: join(__dirname, "generated", "typegen.dto.ts"),
         schema: join(__dirname, "generated", "schema.gql"),

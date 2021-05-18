@@ -1,6 +1,5 @@
 const Fastify = require("fastify");
 const mercurius = require("mercurius");
-const { boomify } = require("@hapi/boom");
 
 const { schema } = require("./schema")
 
@@ -8,11 +7,12 @@ const app = Fastify();
 
 app.register(mercurius, { schema });
 
-async function start() {
+async function start(port) {
   try {
-    await app.listen(4000);
+    await app.listen(port);
   } catch (err) {
-    throw boomify(err);
+    console.error(err)
+    process.exit()
   }
 }
-start();
+start(4000);

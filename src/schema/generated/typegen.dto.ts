@@ -28,13 +28,23 @@ export interface NexusGenScalars {
 }
 
 export interface NexusGenObjects {
-  Mutation: {};
-  Query: {};
-  Todo: { // root type
+  Comment: { // root type
     _id?: string | null; // String
-    description?: string | null; // String
-    isCompleted?: boolean | null; // Boolean
+    message?: string | null; // String
+    post_id?: string | null; // String
   }
+  Mutation: {};
+  Post: { // root type
+    _id?: string | null; // String
+    content?: string | null; // String
+    title?: string | null; // String
+  }
+  PostComments: { // root type
+    _id?: string | null; // String
+    content?: string | null; // String
+    title?: string | null; // String
+  }
+  Query: {};
 }
 
 export interface NexusGenInterfaces {
@@ -48,50 +58,97 @@ export type NexusGenRootTypes = NexusGenObjects
 export type NexusGenAllTypes = NexusGenRootTypes & NexusGenScalars
 
 export interface NexusGenFieldTypes {
+  Comment: { // field return type
+    _id: string | null; // String
+    message: string | null; // String
+    post_id: string | null; // String
+  }
   Mutation: { // field return type
-    destroyTodo: NexusGenRootTypes['Todo'] | null; // Todo
-    newTodo: NexusGenRootTypes['Todo'] | null; // Todo
-    patchTodo: NexusGenRootTypes['Todo'] | null; // Todo
+    destroyComment: NexusGenRootTypes['Comment'] | null; // Comment
+    destroyPost: NexusGenRootTypes['Post'] | null; // Post
+    newComment: NexusGenRootTypes['Comment'] | null; // Comment
+    newPost: NexusGenRootTypes['Post'] | null; // Post
+    patchComment: NexusGenRootTypes['Comment'] | null; // Comment
+    patchPost: NexusGenRootTypes['Post'] | null; // Post
+  }
+  Post: { // field return type
+    _id: string | null; // String
+    content: string | null; // String
+    title: string | null; // String
+  }
+  PostComments: { // field return type
+    _id: string | null; // String
+    comments: Array<NexusGenRootTypes['Comment'] | null> | null; // [Comment]
+    content: string | null; // String
+    title: string | null; // String
   }
   Query: { // field return type
-    allTodos: Array<NexusGenRootTypes['Todo'] | null> | null; // [Todo]
-  }
-  Todo: { // field return type
-    _id: string | null; // String
-    description: string | null; // String
-    isCompleted: boolean | null; // Boolean
+    findPosts: Array<NexusGenRootTypes['Post'] | null> | null; // [Post]
+    singlePost: NexusGenRootTypes['PostComments'] | null; // PostComments
   }
 }
 
 export interface NexusGenFieldTypeNames {
+  Comment: { // field return type name
+    _id: 'String'
+    message: 'String'
+    post_id: 'String'
+  }
   Mutation: { // field return type name
-    destroyTodo: 'Todo'
-    newTodo: 'Todo'
-    patchTodo: 'Todo'
+    destroyComment: 'Comment'
+    destroyPost: 'Post'
+    newComment: 'Comment'
+    newPost: 'Post'
+    patchComment: 'Comment'
+    patchPost: 'Post'
+  }
+  Post: { // field return type name
+    _id: 'String'
+    content: 'String'
+    title: 'String'
+  }
+  PostComments: { // field return type name
+    _id: 'String'
+    comments: 'Comment'
+    content: 'String'
+    title: 'String'
   }
   Query: { // field return type name
-    allTodos: 'Todo'
-  }
-  Todo: { // field return type name
-    _id: 'String'
-    description: 'String'
-    isCompleted: 'Boolean'
+    findPosts: 'Post'
+    singlePost: 'PostComments'
   }
 }
 
 export interface NexusGenArgTypes {
   Mutation: {
-    destroyTodo: { // args
-      id?: string | null; // String
+    destroyComment: { // args
+      id: string; // String!
     }
-    newTodo: { // args
-      description?: string | null; // String
-      isCompleted?: boolean | null; // Boolean
+    destroyPost: { // args
+      id: string; // String!
     }
-    patchTodo: { // args
-      description?: string | null; // String
-      id?: string | null; // String
-      isCompleted?: boolean | null; // Boolean
+    newComment: { // args
+      message: string; // String!
+      post_id: string; // String!
+    }
+    newPost: { // args
+      content: string; // String!
+      title: string; // String!
+    }
+    patchComment: { // args
+      id: string; // String!
+      message: string; // String!
+      post_id: string; // String!
+    }
+    patchPost: { // args
+      content: string; // String!
+      id: string; // String!
+      title: string; // String!
+    }
+  }
+  Query: {
+    singlePost: { // args
+      id: string; // String!
     }
   }
 }

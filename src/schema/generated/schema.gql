@@ -2,23 +2,50 @@
 ### Do not make changes to this file directly
 
 
+type Comment {
+  """ID of the comment."""
+  _id: String
+
+  """Message of the comment."""
+  message: String
+
+  """Post of the comment."""
+  post_id: String
+}
+
 type Mutation {
-  destroyTodo(id: String): Todo
-  newTodo(description: String, isCompleted: Boolean): Todo
-  patchTodo(description: String, id: String, isCompleted: Boolean): Todo
+  destroyComment(id: String!): Comment
+  destroyPost(id: String!): Post
+  newComment(message: String!, post_id: String!): Comment
+  newPost(content: String!, title: String!): Post
+  patchComment(id: String!, message: String!, post_id: String!): Comment
+  patchPost(content: String!, id: String!, title: String!): Post
+}
+
+type Post {
+  """ID of the post."""
+  _id: String
+
+  """Content of the post."""
+  content: String
+
+  """Title of the post."""
+  title: String
+}
+
+type PostComments {
+  """ID of the post."""
+  _id: String
+  comments: [Comment]
+
+  """Content of the post."""
+  content: String
+
+  """Title of the post."""
+  title: String
 }
 
 type Query {
-  allTodos: [Todo]
-}
-
-type Todo {
-  """ID of the todo."""
-  _id: String
-
-  """Description of the todo."""
-  description: String
-
-  """Completion of the todo."""
-  isCompleted: Boolean
+  findPosts: [Post]
+  singlePost(id: String!): PostComments
 }

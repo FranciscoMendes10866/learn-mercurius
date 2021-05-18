@@ -1,7 +1,8 @@
 const monk = require('monk')
 
-const db = monk('mongodb://root:root@localhost:27017/?authSource=admin')
+const db = monk('mongodb://root:root@localhost:27017/mercurius?authSource=admin')
 
-const todos = db.get('todos')
+const Posts = db.get('posts')
+const Comments = db.get('comments')
 
-module.exports = { todos }
+module.exports = { Posts, Comments }
