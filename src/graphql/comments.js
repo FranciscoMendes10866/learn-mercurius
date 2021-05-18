@@ -27,9 +27,9 @@ const patchComment = mutationField('patchComment', {
         message: nonNull(stringArg()),
         post_id: nonNull(stringArg()),
     },
-    resolve: async (root, { id, message, user_id }, ctx) => {
+    resolve: async (root, { id, message, post_id }, ctx) => {
         try {
-            await Comments.update({ _id: id }, { $set: { message, user_id } })
+            await Comments.update({ _id: id }, { $set: { message, post_id } })
             return await Comments.findOne({ _id: id })
         } catch (err) {
             throw boomify(err)
