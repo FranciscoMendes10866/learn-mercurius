@@ -11,6 +11,9 @@ type Comment {
 
   """Post of the comment."""
   post_id: String
+
+  """Post of the comment."""
+  user_id: String
 }
 
 type Mutation {
@@ -33,6 +36,9 @@ type Post {
 
   """Title of the post."""
   title: String
+
+  """UserID of the post."""
+  user_id: String
 }
 
 type PostComments {
@@ -45,6 +51,9 @@ type PostComments {
 
   """Title of the post."""
   title: String
+
+  """Post of the comment."""
+  user_id: String
 }
 
 type Query {
@@ -58,9 +67,6 @@ type UserSignIn {
 
   """Email of the user."""
   email: String
-
-  """Password of the user."""
-  password: String
 
   """Token of the user."""
   token: String

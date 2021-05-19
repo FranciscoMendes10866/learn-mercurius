@@ -32,23 +32,25 @@ export interface NexusGenObjects {
     _id?: string | null; // String
     message?: string | null; // String
     post_id?: string | null; // String
+    user_id?: string | null; // String
   }
   Mutation: {};
   Post: { // root type
     _id?: string | null; // String
     content?: string | null; // String
     title?: string | null; // String
+    user_id?: string | null; // String
   }
   PostComments: { // root type
     _id?: string | null; // String
     content?: string | null; // String
     title?: string | null; // String
+    user_id?: string | null; // String
   }
   Query: {};
   UserSignIn: { // root type
     _id?: string | null; // String
     email?: string | null; // String
-    password?: string | null; // String
     token?: string | null; // String
     username?: string | null; // String
   }
@@ -75,6 +77,7 @@ export interface NexusGenFieldTypes {
     _id: string | null; // String
     message: string | null; // String
     post_id: string | null; // String
+    user_id: string | null; // String
   }
   Mutation: { // field return type
     destroyComment: NexusGenRootTypes['Comment'] | null; // Comment
@@ -90,12 +93,14 @@ export interface NexusGenFieldTypes {
     _id: string | null; // String
     content: string | null; // String
     title: string | null; // String
+    user_id: string | null; // String
   }
   PostComments: { // field return type
     _id: string | null; // String
     comments: Array<NexusGenRootTypes['Comment'] | null> | null; // [Comment]
     content: string | null; // String
     title: string | null; // String
+    user_id: string | null; // String
   }
   Query: { // field return type
     findPosts: Array<NexusGenRootTypes['Post'] | null> | null; // [Post]
@@ -104,7 +109,6 @@ export interface NexusGenFieldTypes {
   UserSignIn: { // field return type
     _id: string | null; // String
     email: string | null; // String
-    password: string | null; // String
     token: string | null; // String
     username: string | null; // String
   }
@@ -121,6 +125,7 @@ export interface NexusGenFieldTypeNames {
     _id: 'String'
     message: 'String'
     post_id: 'String'
+    user_id: 'String'
   }
   Mutation: { // field return type name
     destroyComment: 'Comment'
@@ -136,12 +141,14 @@ export interface NexusGenFieldTypeNames {
     _id: 'String'
     content: 'String'
     title: 'String'
+    user_id: 'String'
   }
   PostComments: { // field return type name
     _id: 'String'
     comments: 'Comment'
     content: 'String'
     title: 'String'
+    user_id: 'String'
   }
   Query: { // field return type name
     findPosts: 'Post'
@@ -150,7 +157,6 @@ export interface NexusGenFieldTypeNames {
   UserSignIn: { // field return type name
     _id: 'String'
     email: 'String'
-    password: 'String'
     token: 'String'
     username: 'String'
   }

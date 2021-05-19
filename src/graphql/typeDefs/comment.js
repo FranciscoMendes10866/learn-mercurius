@@ -8,6 +8,7 @@ const Comment = objectType({
         t.string('_id', { description: 'ID of the comment.'})
         t.string('message', { description: 'Message of the comment.'})
         t.string('post_id', { description: 'Post of the comment.'})
+        t.string('user_id', { description: 'Post of the comment.'})
     }
 })
 
@@ -17,6 +18,7 @@ const PostComments = objectType({
         t.string('_id', { description: 'ID of the post.'})
         t.string('title', { description: 'Title of the post.'})
         t.string('content', { description: 'Content of the post.'})
+        t.string('user_id', { description: 'Post of the comment.'})
         t.list.field('comments', {
             type: Comment,
             resolve: async ({ _id }, args, ctx) => {

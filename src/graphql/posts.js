@@ -3,6 +3,7 @@ const { boomify } = require('@hapi/boom')
 
 const { Posts, Comments } = require('../db/mongo')
 const Post = require('./typeDefs/post')
+const AuthGuard = require('../guards/authorization')
 
 const newPost = mutationField('newPost', {
     type: Post,
@@ -10,10 +11,10 @@ const newPost = mutationField('newPost', {
         title: nonNull(stringArg()),
         content: nonNull(stringArg())
     },
-    resolve: async (root, args, ctx) => {
+    resolve: async (root, { title, content }, { request }) => {
         try {
-            const data = await Posts.insert({ ...args })
-            return data
+            const cred = AuthGuard(request)
+            return await Posts.insert({ title, content, user_id: cred })
         } catch (err) {
             throw boomify(err)
         }

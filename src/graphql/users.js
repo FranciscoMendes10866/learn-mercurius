@@ -1,6 +1,6 @@
 const { mutationField, stringArg, nonNull } = require('@nexus/schema')
 const { boomify } = require('@hapi/boom')
-const { hash, verify } = require('argon2')
+const { hash, verify, argon2id } = require('argon2')
 const { sign } = require('jsonwebtoken')
 
 const { Users } = require('../db/mongo')
@@ -15,9 +15,8 @@ const signUp = mutationField('signUp', {
     },
     resolve: async (root, { email, password, username }, ctx) => {
         try {
-            const hashed = await hash(password)
-            const data = await Users.insert({ password: hashed, email, username })
-            return data
+            const hashed = await hash(password, argon2id)
+            return await Users.insert({ password: hashed, email, username })
         } catch (err) {
             throw boomify(err)
         }
@@ -41,7 +40,7 @@ const signIn = mutationField('signIn', {
                 return null
             }
             const token = sign({ id: data._id }, 'SECRET')
-            return { token }
+            return { _id: data._id, username: data.username, email: data.email, token }
         } catch (err) {
             throw boomify(err)
         }
