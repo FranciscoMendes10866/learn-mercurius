@@ -20,6 +20,8 @@ type Mutation {
   newPost(content: String!, title: String!): Post
   patchComment(id: String!, message: String!, post_id: String!): Comment
   patchPost(content: String!, id: String!, title: String!): Post
+  signIn(email: String!, password: String!): UserSignIn
+  signUp(email: String!, password: String!, username: String!): UserSignUp
 }
 
 type Post {
@@ -48,4 +50,35 @@ type PostComments {
 type Query {
   findPosts: [Post]
   singlePost(id: String!): PostComments
+}
+
+type UserSignIn {
+  """ID of the user."""
+  _id: String
+
+  """Email of the user."""
+  email: String
+
+  """Password of the user."""
+  password: String
+
+  """Token of the user."""
+  token: String
+
+  """Username of the user."""
+  username: String
+}
+
+type UserSignUp {
+  """ID of the user."""
+  _id: String
+
+  """Email of the user."""
+  email: String
+
+  """Password of the user."""
+  password: String
+
+  """Username of the user."""
+  username: String
 }

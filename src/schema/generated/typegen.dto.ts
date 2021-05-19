@@ -45,6 +45,19 @@ export interface NexusGenObjects {
     title?: string | null; // String
   }
   Query: {};
+  UserSignIn: { // root type
+    _id?: string | null; // String
+    email?: string | null; // String
+    password?: string | null; // String
+    token?: string | null; // String
+    username?: string | null; // String
+  }
+  UserSignUp: { // root type
+    _id?: string | null; // String
+    email?: string | null; // String
+    password?: string | null; // String
+    username?: string | null; // String
+  }
 }
 
 export interface NexusGenInterfaces {
@@ -70,6 +83,8 @@ export interface NexusGenFieldTypes {
     newPost: NexusGenRootTypes['Post'] | null; // Post
     patchComment: NexusGenRootTypes['Comment'] | null; // Comment
     patchPost: NexusGenRootTypes['Post'] | null; // Post
+    signIn: NexusGenRootTypes['UserSignIn'] | null; // UserSignIn
+    signUp: NexusGenRootTypes['UserSignUp'] | null; // UserSignUp
   }
   Post: { // field return type
     _id: string | null; // String
@@ -86,6 +101,19 @@ export interface NexusGenFieldTypes {
     findPosts: Array<NexusGenRootTypes['Post'] | null> | null; // [Post]
     singlePost: NexusGenRootTypes['PostComments'] | null; // PostComments
   }
+  UserSignIn: { // field return type
+    _id: string | null; // String
+    email: string | null; // String
+    password: string | null; // String
+    token: string | null; // String
+    username: string | null; // String
+  }
+  UserSignUp: { // field return type
+    _id: string | null; // String
+    email: string | null; // String
+    password: string | null; // String
+    username: string | null; // String
+  }
 }
 
 export interface NexusGenFieldTypeNames {
@@ -101,6 +129,8 @@ export interface NexusGenFieldTypeNames {
     newPost: 'Post'
     patchComment: 'Comment'
     patchPost: 'Post'
+    signIn: 'UserSignIn'
+    signUp: 'UserSignUp'
   }
   Post: { // field return type name
     _id: 'String'
@@ -116,6 +146,19 @@ export interface NexusGenFieldTypeNames {
   Query: { // field return type name
     findPosts: 'Post'
     singlePost: 'PostComments'
+  }
+  UserSignIn: { // field return type name
+    _id: 'String'
+    email: 'String'
+    password: 'String'
+    token: 'String'
+    username: 'String'
+  }
+  UserSignUp: { // field return type name
+    _id: 'String'
+    email: 'String'
+    password: 'String'
+    username: 'String'
   }
 }
 
@@ -144,6 +187,15 @@ export interface NexusGenArgTypes {
       content: string; // String!
       id: string; // String!
       title: string; // String!
+    }
+    signIn: { // args
+      email: string; // String!
+      password: string; // String!
+    }
+    signUp: { // args
+      email: string; // String!
+      password: string; // String!
+      username: string; // String!
     }
   }
   Query: {
