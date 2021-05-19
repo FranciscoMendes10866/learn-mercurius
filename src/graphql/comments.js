@@ -25,13 +25,11 @@ const patchComment = mutationField("patchComment", {
   type: Comment,
   args: {
     id: nonNull(stringArg()),
-    message: nonNull(stringArg()),
-    post_id: nonNull(stringArg()),
+    message: nonNull(stringArg())
   },
   resolve: async (root, { id, message, post_id }, ctx) => {
     try {
-      await Comments.update({ _id: id }, { $set: { message, post_id } });
-      return await Comments.findOne({ _id: id });
+      return await Comments.findOneAndUpdate({ _id: id }, { $set: { message } });
     } catch (err) {
       throw boomify(err);
     }
@@ -45,9 +43,7 @@ const destroyComment = mutationField("destroyComment", {
   },
   resolve: async (root, { id }, ctx) => {
     try {
-      const data = await Comments.findOne({ _id: id });
-      await Comments.remove({ _id: id });
-      return data;
+      return await Comments.findOneAndDelete({ _id: id });
     } catch (err) {
       throw boomify(err);
     }

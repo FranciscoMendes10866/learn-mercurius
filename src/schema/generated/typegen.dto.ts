@@ -187,7 +187,6 @@ export interface NexusGenArgTypes {
     patchComment: { // args
       id: string; // String!
       message: string; // String!
-      post_id: string; // String!
     }
     patchPost: { // args
       content: string; // String!

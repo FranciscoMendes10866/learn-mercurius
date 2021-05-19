@@ -41,8 +41,7 @@ const patchPost = mutationField('patchPost', {
     },
     resolve: async (root, { id, title, content }, ctx) => {
         try {
-            await Posts.update({ _id: id }, { $set: { title, content } })
-            return await Posts.findOne({ _id: id })
+            return await Posts.findOneAndUpdate({ _id: id }, { $set: { title, content } })
         } catch (err) {
             throw boomify(err)
         }
@@ -56,8 +55,7 @@ const destroyPost = mutationField('destroyPost', {
     },
     resolve: async (root, { id }, ctx) => {
         try {
-            const data = await Posts.findOne({ _id: id })
-            await Posts.remove({ _id: id })
+            const data = await Posts.findOneAndDelete({ _id: id })
             await Comments.remove({ post_id: id })
             return data
         } catch (err) {
