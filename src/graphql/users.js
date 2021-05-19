@@ -15,6 +15,10 @@ const signUp = mutationField('signUp', {
     },
     resolve: async (root, { email, password, username }, ctx) => {
         try {
+            const find = await Users.findOne({ email })
+            if (find) {
+                return null
+            }
             const hashed = await hash(password, argon2id)
             return await Users.insert({ password: hashed, email, username })
         } catch (err) {
@@ -31,16 +35,16 @@ const signIn = mutationField('signIn', {
     },
     resolve: async (root, { email, password }, ctx) => {
         try {
-            const data = await Users.findOne({ email })
-            if (!data) {
+            const find = await Users.findOne({ email })
+            if (!find) {
                 return null
             }
-            const val = await verify(data.password, password)
+            const val = await verify(find.password, password)
             if (!val) {
                 return null
             }
-            const token = sign({ id: data._id }, 'SECRET')
-            return { _id: data._id, username: data.username, email: data.email, token }
+            const token = sign({ id: find._id }, 'SECRET')
+            return { _id: find._id, username: find.username, email: find.email, token }
         } catch (err) {
             throw boomify(err)
         }
